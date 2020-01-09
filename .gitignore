@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# Image Output File
+*.tga
+*.TGA
+
+# Emacs
+*~
+
+# Thirdparty
+thirdparty/
