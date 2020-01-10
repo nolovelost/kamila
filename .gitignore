@@ -38,5 +38,6 @@
 # Emacs
 *~
 
-# Thirdparty
+# Project Specifics
 thirdparty/
+bin/
