@@ -22,19 +22,33 @@ void Line(int x0, int y0, int x1, int y1, const TGAColor color, TGAImage& image)
 	std::swap(x1, y1);
 	steep = true;
     }
-	
-    for (int x = x0; x <= x1; x++)
-    {
-	int y;
-	float t;
-	t = (x - x0) / (float)(x1 - x0); // ratio ahead in the x-axis
-	y = y0 * (1. - t) + y1 * t; // parametric eq. for step-wise increment of the line's y-axis
+    
+    float dx = x0 - x1;
+    float dy = y0 - y1;
+    float slope = std::abs(dy / (float)dx);
+    float error = 0.;
 
+    int y = y0;
+    for (int x = x0; x <= x1; x++)
+    {	
 	// Transpose the rendering if steep
 	if (steep)
+	{
 	    image.set(y, x, color);
+	}
 	else
+	{
 	    image.set(x, y, color);
+	}
+
+	// Increment error by the slope value every iteration
+	error += slope;
+	// If error exceeds one pixel width: increment Y | decrement error
+	while (error > .5) // One if statement is sufficient?
+	{
+	    y += (y0 > y1) ? -1 : 1;
+	    error -= 1.;
+	}	
     }
 }
 
@@ -43,7 +57,7 @@ int main(int argc, char** argv)
     TGAImage image(100, 100, TGAImage::RGB);
     Line(13, 20, 80, 40, white, image); 
     Line(20, 13, 40, 80, red, image); 
-    Line(80, 40, 13, 40, red, image);
+    Line(80, 40, 13, 80, red, image);
     image.flip_vertically(); // i want to have the origin at the left bottom corner of the image
     image.write_tga_file("output.tga");
     return 0;
