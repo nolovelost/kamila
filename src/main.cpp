@@ -1,6 +1,7 @@
 #include <math.h>
 #include "tgaimage.h"
 #include "Line.h"
+#include "Geometry.h"
 
 #define WIDTH 800
 #define HEIGHT 600
