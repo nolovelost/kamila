@@ -8,7 +8,7 @@ LIBS         = -lm
 SRCDIR = ./src/
 
 DESTDIR = ./bin/
-TARGET  = main
+TARGET  = kamila
 
 OBJECTS := $(patsubst $(SRCDIR)%.cpp,$(SRCDIR)%.o,$(wildcard $(SRCDIR)*.cpp))
 
