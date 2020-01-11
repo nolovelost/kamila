@@ -32,16 +32,16 @@ int main(int argc, char** argv)
     // Screen Diagonal Lines
     Line screenDiag1(0, 0, WIDTH, HEIGHT);
     Line screenDiag2(0, HEIGHT, WIDTH, 0);
-    liner.Draw(screenDiag1, red, image);
-    liner.Draw(screenDiag2, red, image);
+    liner.Draw(&screenDiag1, red, image);
+    liner.Draw(&screenDiag2, red, image);
 
     // Other Lines
     Line l0(13, 20, 80, 40);
     Line l1(13, 20, 40, 80);
     Line l2(80, 40, 40, 80);
-    liner.FastDraw(l0, white, image); 
-    liner.FastDraw(l1, white, image); 
-    liner.FastDraw(l2, white, image);
+    liner.FastDraw(&l0, white, image); 
+    liner.FastDraw(&l1, white, image); 
+    liner.FastDraw(&l2, white, image);
 
     image.flip_vertically(); // i want to have the origin at the left bottom corner of the image
     image.write_tga_file("output.tga");

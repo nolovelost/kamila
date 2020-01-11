@@ -1,14 +1,14 @@
 #include <math.h>
 #include "Line.h"
 
-void Liner::Draw(Line line, const TGAColor color, TGAImage& image)
+void Liner::Draw(Line* line, const TGAColor& color, TGAImage& image)
 {
     bool steep = false;
     
-    int x0 = line.src.x;
-    int y0 = line.src.y;
-    int x1 = line.dest.x;
-    int y1 = line.dest.y;
+    int x0 = line->src.x;
+    int y0 = line->src.y;
+    int x1 = line->dest.x;
+    int y1 = line->dest.y;
 
     // If line is from right to left: swap
     if (x0 > x1)
@@ -36,14 +36,14 @@ void Liner::Draw(Line line, const TGAColor color, TGAImage& image)
     }
 }
 
-void Liner::FastDraw(Line line, const TGAColor color, TGAImage& image)
+void Liner::FastDraw(Line* line, const TGAColor& color, TGAImage& image)
 {
     bool steep = false;
 
-    int x0 = line.src.x;
-    int y0 = line.src.y;
-    int x1 = line.dest.x;
-    int y1 = line.dest.y;
+    int x0 = line->src.x;
+    int y0 = line->src.y;
+    int x1 = line->dest.x;
+    int y1 = line->dest.y;
     
     // If line is from right to left: swap
     if (x0 > x1)
@@ -62,8 +62,6 @@ void Liner::FastDraw(Line line, const TGAColor color, TGAImage& image)
     
     int dx = x0 - x1;
     int dy = y0 - y1;
-    int derr = abs(dy) * 2;
-    int err = 0;
     float slope = abs(dy / (float)dx);
     float serror = 0.;
     
@@ -72,7 +70,11 @@ void Liner::FastDraw(Line line, const TGAColor color, TGAImage& image)
     {	
 	// Transpose the rendering if steep
 	PutPixel(x, y, color, image, steep);
-/*
+
+	/*
+	int derr = abs(dy) * 2;
+	int err = 0;
+
 	// Increment error by deltaY for every x-wise interation
 	err += derr;
 	// If error exceeds dx: increment Y | decrement error
@@ -81,7 +83,7 @@ void Liner::FastDraw(Line line, const TGAColor color, TGAImage& image)
 	    y += (y0 > y1) ? -1 : 1;
 	    err -= dx * 2;
 	}
-*/
+	*/
 	
 	// Increment error by the slope value every iteration
 	serror += slope;
