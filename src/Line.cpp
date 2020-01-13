@@ -10,13 +10,7 @@ void Liner::Draw(Line* line, const TGAColor& color, TGAImage& image)
     int x1 = line->dest.x;
     int y1 = line->dest.y;
 
-    // If line is from right to left: swap
-    if (x0 > x1)
-    {
-	std::swap(x0, x1);
-	std::swap(y0, y1);
-    }
-    
+    // ORDER BETWEEN STEEPNESS CHECK AND DRAW DIRECTION CHECK MATTERS !
     // If line is steep: transpose
     if (abs(x1-x0) < abs(y1-y0))
     {
@@ -24,11 +18,17 @@ void Liner::Draw(Line* line, const TGAColor& color, TGAImage& image)
 	std::swap(x1, y1);
 	steep = true;
     }
-	
+    // If line is from right to left: swap
+    if (x0 > x1)
+    {
+	std::swap(x0, x1);
+	std::swap(y0, y1);
+    }
+
+    int y;
+    float t;
     for (int x = x0; x <= x1; x++)
     {
-	int y;
-	float t;
 	t = (x - x0) / (float)(x1 - x0); // ratio ahead in the x-axis
 	y = y0 * (1. - t) + y1 * t; // parametric eq. for step-wise increment of the line's y-axis
 
@@ -44,20 +44,20 @@ void Liner::FastDraw(Line* line, const TGAColor& color, TGAImage& image)
     int y0 = line->src.y;
     int x1 = line->dest.x;
     int y1 = line->dest.y;
-    
-    // If line is from right to left: swap
-    if (x0 > x1)
-    {
-	std::swap(x0, x1);
-	std::swap(y0, y1);
-    }
-    
+
+    // ORDER BETWEEN STEEPNESS CHECK AND DRAW DIRECTION CHECK MATTERS ! 
     // If line is steep: transpose
     if (abs(x1-x0) < abs(y1-y0))
     {
 	std::swap(x0, y0);
 	std::swap(x1, y1);
 	steep = true;
+    }
+    // If line is from right to left: swap
+    if (x0 > x1)
+    {
+	std::swap(x0, x1);
+	std::swap(y0, y1);
     }
     
     int dx = x0 - x1;

@@ -79,7 +79,6 @@ int main(int argc, char** argv)
 		(vert1.x + 1.) * WIDTH/2.,
 		(vert1.y + 1.) * HEIGHT/2.);
 	    liner.FastDraw(wire, white, image);
-//	    drawline(wire->src.x, wire->src.y, wire->dest.x, wire->dest.y, image, white);	    
 	    delete wire;
 	}
     }

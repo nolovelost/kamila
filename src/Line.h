@@ -30,6 +30,7 @@ class Liner
 public:
     void Draw(Line* line, const TGAColor& color, TGAImage& image);
     void FastDraw(Line* line, const TGAColor& color, TGAImage& image);
+    void DrawLine(Line* line, const TGAColor& color, TGAImage& image);
 
 private:
     inline void PutPixel(int x, int y, const TGAColor color, TGAImage& image, bool transpose = false);
