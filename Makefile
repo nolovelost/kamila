@@ -1,7 +1,7 @@
 .PHONY = all clean
 
 CC = g++
-CPPFLAGS     =
+CPPFLAGS     = -g
 LDFLAGS      =
 LIBS         = -lm
 

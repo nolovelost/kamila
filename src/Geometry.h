@@ -76,5 +76,9 @@ template <class T> std::ostream& operator<< (std::ostream& o, Vec3<T>& vec)
     return o;
 }
 
-#endif
+typedef Vec2<int> Vec2i;
+typedef Vec2<float> Vec2f;
+typedef Vec3<int> Vec3i;
+typedef Vec3<float>  Vec3f;
 
+#endif

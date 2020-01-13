@@ -1,3 +1,6 @@
+#ifndef __LINE_H__
+#define __LINE_H__
+
 #include "tgaimage.h"
 
 struct Line
@@ -31,3 +34,5 @@ public:
 private:
     inline void PutPixel(int x, int y, const TGAColor color, TGAImage& image, bool transpose = false);
 };
+
+#endif
